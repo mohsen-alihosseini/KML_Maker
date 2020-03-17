@@ -1,0 +1,73 @@
+Sub Write2Text()
+Dim Addr, Space, CCC, SCC, CBN, SC, CurrRow, LastRow, LastCol, LR
+Dim wbSource As Workbook
+Dim wsSource As Worksheet
+Dim wbDest As Workbook
+Dim fName As String
+
+
+'Vlookup data and autofill up to last row
+lrow = Cells(Rows.Count, "A").End(xlUp).Row
+Range("C2:C" & lrow).FillDown
+Range("D2:D" & lrow).FillDown
+Range("E2:E" & lrow).FillDown
+Range("F2:F" & lrow).FillDown
+Range("G2:G" & lrow).FillDown
+
+
+
+'References
+Set wbSource = ActiveWorkbook
+Set wsSource = ActiveSheet
+Set wbDest = Workbooks.Add
+Worksheets("Sheet1").Activate
+
+
+
+'Copy range on original sheet
+
+wsSource.Range("G2:G" & lrow).Copy
+
+
+
+'----------------------------
+'Save in new workbook
+Worksheets("Sheet1").Activate
+
+
+'"<?xml version=""1.0"" encoding=""UTF-8""?>" & Chr(10) & "<kml xmlns=""http://www.opengis.net/kml/2.2"" xmlns:gx=""http://www.google.com/kml/ext/2.2"" xmlns:kml=""http://www.opengis.net/kml/2.2"" xmlns:atom=""http://www.w3.org/2005/Atom"">" & Chr(10) & ""
+    
+'add header
+wbDest.Worksheets(1).Cells(5, 1).PasteSpecial Paste:=xlPasteValuesAndNumberFormats
+wbDest.Worksheets(1).Cells(1, 1) = "<?xml version=""1.0"" encoding=""UTF-8""?>"
+wbDest.Worksheets(1).Cells(2, 1) = "<kml xmlns=""http://www.opengis.net/kml/2.2"" xmlns:gx=""http://www.google.com/kml/ext/2.2"" xmlns:kml=""http://www.opengis.net/kml/2.2"" xmlns:atom=""http://www.w3.org/2005/Atom"">"
+wbDest.Worksheets(1).Cells(3, 1) = "<Document>"
+wbDest.Worksheets(1).Cells(4, 1) = "  <name>KMLMweb.kml</name>"
+
+'add footer
+wbDest.Worksheets(1).Cells(lrow + 5, 1) = "</Document>"
+wbDest.Worksheets(1).Cells(lrow + 6, 1) = "</kml>"
+
+Application.CutCopyMode = False
+wbDest.Worksheets(1).Cells(1, 1).Select
+
+
+
+'Get file name and location and Suffix "kml"
+fName = Application.GetSaveAsFilename(FileFilter:="KML Files (*.kml), *.kml", Title:="Save As")
+If fName = "" Then Exit Sub '//user cancelled
+
+'Save new tab delimited file with print method
+wbDest.SaveAs fName, xlTextPrinter
+
+wbDest.Close SaveChanges:=True
+'----------------------------
+
+
+
+End Sub
+
+
+
+
+
