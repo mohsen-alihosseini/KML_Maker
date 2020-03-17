@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+  <name>KMLMweb.kml</name>
+<Placemark>
+      <LineString>
+          <coordinates>
+     -71.094162,42.36009,10 -71.058839,42.360206,10
+          </coordinates>
+      </LineString>
+     </Placemark>
+<Placemark>
+      <LineString>
+          <coordinates>
+     -71.058839,42.360206,10 -71.08167,42.340766,10
+          </coordinates>
+      </LineString>
+     </Placemark>
+<Placemark>
+      <LineString>
+          <coordinates>
+     -71.094162,42.36009,10 -71.08167,42.340766,10
+          </coordinates>
+      </LineString>
+     </Placemark>
+
+</Document>
+</kml>
